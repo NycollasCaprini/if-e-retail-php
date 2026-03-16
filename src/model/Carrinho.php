@@ -8,9 +8,12 @@ class Carrinho extends GenericModel
     private $status;
     private $valorTotal;
 
-    public function __construct($listaProdutos, $status, $valorTotal)
+    private $cliente;
+
+    public function __construct($listaProdutos, $status, $valorTotal, $cliente)
     {
-        $this->listaProdutos = isset($listaProdutos) ? $listaProdutos : []; //> Aqui se o `$listaProdutos` foi informado, usa ele; caso contrário, inicia como array vazio.
+        $this->cliente=$cliente;
+        $this->listaProdutos = $listaProdutos;
         $this->status = $status;
         $this->valorTotal = $valorTotal;
     }
@@ -43,29 +46,5 @@ class Carrinho extends GenericModel
     public function getValorTotal()
     {
         return $this->valorTotal;
-    }
-
-    public function addProduto(Produto $produto)
-    {
-        $this->listaProdutos[] = $produto;
-        $this->valorTotal += $produto->getPrecoUnitario() * $produto->getQuantidade();
-    }
-
-    public function deleteProduto(Produto $produto)
-    {
-        foreach ($this->listaProdutos as $key => $item) {
-            if ($item->getID() === $produto->getID()) {
-                $this->valorTotal -= $item->getPrecoUnitario() * $item->getQuantidade();
-                unset($this->listaProdutos[$key]);
-                $this->listaProdutos = array_values($this->listaProdutos);
-                break;
-            }
-        }
-    }
-
-    public function esvaziarCarrinho()
-    {
-        $this->listaProdutos = [];
-        $this->valorTotal = 0;
     }
 }

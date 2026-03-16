@@ -44,9 +44,4 @@ class Order extends GenericModel
     {
         return $this->status;
     }
-
-    public function cancelarCompra()
-    {
-        $this->status = false;
-    }
 }
