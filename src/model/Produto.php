@@ -2,11 +2,22 @@
 
 namespace model;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table(name: "tb_produto")]
 class Produto extends GenericModel
 {
+    #[ORM\Column(type: "string")]
     private $descricao;
-    private $quantidade;
+
+    #[ORM\Column(type: "integer")]
+    private $quantidade; // Estoque disponível
+
+    #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
     private $precoUnitario;
+
+    #[ORM\Column(type: "string")]
     private $status;
 
     public function __construct($descricao, $quantidade, $precoUnitario, $status)

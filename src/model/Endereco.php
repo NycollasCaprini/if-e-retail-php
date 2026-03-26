@@ -1,18 +1,35 @@
 <?php
 
 namespace model;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity]
+#[ORM\Table(name:"tb_endereco")]
 class Endereco extends GenericModel
 {
+    #[ORM\Column(type: "string")]
     private $rua;
+    #[ORM\Column(type: "string")]
     private $numero;
+    #[ORM\Column(type: "string")]
     private $complemento;
+    #[ORM\Column(type: "string")]
     private $bairro;
+    #[ORM\Column(type: "string")]
     private $cidade;
+    #[ORM\Column(type: "string")]
     private $estado;
+    #[ORM\Column(type: "string")]
     private $cep;
+    #[ORM\Column(type: "string")]
     private $pais;
+    #[ORM\Column(type: "string")]
+
+    #[ORM\ManyToMany(targetEntity: UserModel::class, mappedBy: "enderecos")]
+    private Collection $usuarios;
 
     public function __construct($rua, $numero, $complemento, $bairro, $cidade, $estado, $cep, $pais ){
         $this->rua = $rua;
@@ -24,6 +41,7 @@ class Endereco extends GenericModel
         $this->cep = $cep;
         $this->pais = $pais;
 
+        $this->usuarios = new ArrayCollection();
     }
 
     public function setRua($rua){
