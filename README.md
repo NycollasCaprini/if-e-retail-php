@@ -1,4 +1,4 @@
-# IF E-RETAIl
+# IF E-RETAIL
 
 Sistema de gestão de varejo desenvolvido para o curso de Sistemas de Informação - IFPR Palmas.
 
