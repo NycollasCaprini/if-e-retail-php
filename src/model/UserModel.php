@@ -1,23 +1,43 @@
 <?php
 namespace model;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+#[ORM\Entity]
+#[ORM\Table(name: "tb_user")]
+#[ORM\InheritanceType("SINGLE_TABLE")]
+#[ORM\DiscriminatorColumn(name: "discr", type: "string")]
+#[ORM\DiscriminatorMap(["admin" => Admin::class, "cliente" => Cliente::class])]
 abstract class UserModel extends GenericModel{
+    #[ORM\Column(type:'string')]
     private $name;
+    #[ORM\Column(type:'string')]
     private $cpf;
-    private $endereco;
-    private $contato;
+    #[ORM\ManyToMany(targetEntity: Endereco::class, cascade: ["persist"])]
+    #[ORM\JoinTable(name: "user_enderecos")]
+    protected Collection $enderecos;
+    #[ORM\ManyToMany(targetEntity: Contato::class, cascade: ["persist"])]
+    #[ORM\JoinTable(name: "user_contatos")]
+    protected Collection $contatos;
+    #[ORM\Column(type:'integer')]
     private $idade;
+    #[ORM\Column(type:'string')]
     private $senha;
+    #[ORM\Column(type:'string')]
     private $tipo;
 
 
-    public function __contstruct($name, $cpf, $endereco, $contato, $idade, $senha, $tipo){
+
+    public function __construct($name, $cpf, $idade, $senha, $tipo) {
         $this->name = $name;
         $this->cpf = $cpf;
-        $this->contato = $contato;
-        $this->endereco = $endereco;
         $this->idade = $idade;
         $this->senha = $senha;
         $this->tipo = $tipo;
+
+        $this->enderecos = new ArrayCollection();
+        $this->contatos = new ArrayCollection();
     }
     public function setName($name){
         $this->name=$name;

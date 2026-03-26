@@ -1,13 +1,18 @@
 {
+    "config": {
+        "platform-check": false,
+        "platform": {
+            "php": "8.2.4"
+        }
+    },
     "name": "user/if-e-retail-php",
     "autoload": {
         "psr-4": {
-            "User\\IfERetailPhp\\": "src/",
-            "test\\": "test/",
-            "model\\": "src/model/",
-            "dao\\": "src/dao/",
-            "utils\\": "src/utils/"
-
+          "User\\IfERetailPhp\\": "src/",
+          "dao\\": "src/dao/",
+          "model\\": "src/model/",
+          "test\\": "test/",
+          "utils\\": "src/utils/"
         }
     },
     "authors": [
@@ -20,6 +25,10 @@
         "phpunit/phpunit": "^9.6"
     },
     "require": {
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+        "doctrine/orm": "^3.6",
+        "symfony/console": "^7.0",
+        "symfony/cache": "^7.0",
+        "symfony/var-exporter": "^7.0"
     }
 }
