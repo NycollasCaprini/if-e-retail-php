@@ -12,7 +12,7 @@ class Produto extends GenericModel
     private $descricao;
 
     #[ORM\Column(type: "integer")]
-    private $quantidade; // Estoque disponível
+    private $quantidade;
 
     #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
     private $precoUnitario;

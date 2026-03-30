@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Table(name:'tb_carrinho')]
 class Carrinho extends GenericModel
 {
-    #[ORM\OneToMany(mappedBy: "carrinho", targetEntity: ItemCarrinho::class, cascade: ["all"], orphanRemoval: true)]
-    private Collection $itens;
+    #[ORM\OneToMany(mappedBy: "carrinho_id", targetEntity: ItemPedido::class, cascade: ["all"], orphanRemoval: true)]
+    private $itens;
 
     #[ORM\Column(type: "string")]
     private $status;

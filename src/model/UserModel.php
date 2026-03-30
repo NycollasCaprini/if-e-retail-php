@@ -14,14 +14,13 @@ abstract class UserModel extends GenericModel{
     private $name;
     #[ORM\Column(type:'string')]
     private $cpf;
-    #[ORM\ManyToMany(targetEntity: Endereco::class, cascade: ["persist"])]
-    #[ORM\JoinTable(name: "user_enderecos")]
-    protected Collection $enderecos;
-    #[ORM\ManyToMany(targetEntity: Contato::class, cascade: ["persist"])]
-    #[ORM\JoinTable(name: "user_contatos")]
-    protected Collection $contatos;
-    #[ORM\Column(type:'integer')]
-    private $idade;
+    #[ORM\OneToOne(targetEntity: Endereco::class, cascade: ['all'], orphanRemoval: true, fetch: 'LAZY')]
+    #[ORM\JoinColumn(name:"endereco_id")]
+    protected Collection $endereco;
+    #[ORM\OneToMany(mappedBy: "user", targetEntity: Contato::class, cascade: ["all"], orphanRemoval: true, fetch: 'LAZY')]
+    protected $contatos;
+    #[ORM\Column(type:'date')]
+    private $dataNascimento;
     #[ORM\Column(type:'string')]
     private $senha;
     #[ORM\Column(type:'string')]

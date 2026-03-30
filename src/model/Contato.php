@@ -14,7 +14,7 @@ class Contato extends GenericModel
     private $email;
 
     #[ORM\ManyToOne(targetEntity: UserModel::class)]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'user_id', nullable: false)]
     private $usuario;
 
     public function __construct($telefone, $email)
