@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "tb_item_carrinho")]
-class ItemCarrinho extends GenericModel {
+class ItemPedido extends GenericModel {
     #[ORM\ManyToOne(targetEntity: Produto::class)]
     #[ORM\JoinColumn(name: "produto_id", nullable: false)]
     private $produto;
@@ -17,24 +17,24 @@ class ItemCarrinho extends GenericModel {
     #[ORM\Column(type: "integer")]
     private $quantidade;
 
-    #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
-    private $precoNoMomento;
+    #[ORM\Column(type: "decimal", precision:10, scale: 2)]
+    private $preco;
 
     public function __construct($produto, $carrinho, $quantidade) {
-        $this->produto = $produto;
+        $this->produtos = $produto;
         $this->carrinho = $carrinho;
         $this->quantidade = $quantidade;
-        $this->precoNoMomento = $produto->getPrecoUnitario();
+        $this->preco = $produto->getPrecoUnitario();
     }
 
     public function getProduto()
     {
-        return $this->produto;
+        return $this->produtos;
     }
 
     public function setProduto(Produto $produto)
     {
-        $this->produto = $produto;
+        $this->produtos = $produto;
     }
 
     public function getCarrinho()
@@ -63,9 +63,9 @@ class ItemCarrinho extends GenericModel {
         return $this->precoNoMomento;
     }
 
-    public function setPrecoNoMomento($precoNoMomento)
+    public function setPreco($preco)
     {
-        $this->precoNoMomento = $precoNoMomento;
+        $this->preco = $preco;
     }
 
 }

@@ -28,7 +28,7 @@ class Endereco extends GenericModel
     private $pais;
     #[ORM\Column(type: "string")]
 
-    #[ORM\ManyToMany(targetEntity: UserModel::class, mappedBy: "enderecos")]
+    #[ORM\OneToMany(targetEntity: UserModel::class, mappedBy: "enderecos")]
     private Collection $usuarios;
 
     public function __construct($rua, $numero, $complemento, $bairro, $cidade, $estado, $cep, $pais ){

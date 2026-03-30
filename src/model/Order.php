@@ -1,11 +1,18 @@
 <?php
 
 namespace model;
-
+use Doctrine\ORM\Mapping as ORM;
+#[ORM\Entity]
+#[ORM\Table(name:"tb_order")]
 class Order extends GenericModel
 {
+    #[ORM\Column(type:'datetime')]
     private $dataPedido;
+
+    #[ORM\Column(type:'datetime')]
     private $dataEntrega;
+
+    #[ORM\Column(type:'boolean')]
     private $status;
 
     public function __construct($dataPedido, $dataEntrega, $status)
