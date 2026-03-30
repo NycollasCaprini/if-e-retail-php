@@ -28,10 +28,10 @@ abstract class UserModel extends GenericModel{
 
 
 
-    public function __construct($name, $cpf, $idade, $senha, $tipo) {
+    public function __construct($name, $cpf, $dataNascimento, $senha, $tipo) {
         $this->name = $name;
         $this->cpf = $cpf;
-        $this->idade = $idade;
+        $this->dataNascimento = $dataNascimento;
         $this->senha = $senha;
         $this->tipo = $tipo;
 
@@ -70,12 +70,12 @@ abstract class UserModel extends GenericModel{
         return $this->contato;
     }
 
-    public function setIdade($idade){
-        $this->idade=$idade;
+    public function setDataNascimento($dataNascimento){
+        $this->idade=$dataNascimento;
     }
 
-    public function getIdade(){
-        return $this->idade;
+    public function getDataNascimento(){
+        return $this->dataNascimento;
     }
 
     public function setSenha($senha){

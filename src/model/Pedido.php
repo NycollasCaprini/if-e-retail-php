@@ -3,8 +3,8 @@
 namespace model;
 use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
-#[ORM\Table(name:"tb_order")]
-class Order extends GenericModel
+#[ORM\Table(name:"tb_pedido")]
+class Pedido extends GenericModel
 {
     #[ORM\Column(type:'datetime')]
     private $dataPedido;
@@ -14,6 +14,16 @@ class Order extends GenericModel
 
     #[ORM\Column(type:'boolean')]
     private $status;
+
+    #[ORM\ManyToOne(targetEntity: Cliente::class)]
+    #[ORM\JoinColumn(name: "cliente_id")]
+    private $cliente;
+
+    #[ORM\ManyToMany(targetEntity: Produto::class)]
+    #[ORM\JoinTable(name: "tb_produto_pedido")]
+    #[ORM\JoinColumn(name: "pedido_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "produto_id", referencedColumnName: "id")]
+    private $itens;
 
     public function __construct($dataPedido, $dataEntrega, $status)
     {

@@ -2,8 +2,8 @@
 
 namespace test\dao;
 
-use dao\OrderDAO;
-use model\Order;
+use dao\PedidoDAO;
+use model\Pedido;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use utils\Conexao;
@@ -18,29 +18,29 @@ class OrderDAOTest extends TestCase
         $prop->setValue(null, null);
     }
 
-    private function criarOrder(): Order
+    private function criarOrder(): Pedido
     {
-        return new Order(new DateTime(), new DateTime("+7 days"), "PENDENTE");
+        return new Pedido(new DateTime(), new DateTime("+7 days"), "PENDENTE");
     }
 
     public function testSalvar()
     {
-        // Order não possui #[ORM\Entity] nem #[ORM\Table] — não é uma entidade Doctrine mapeada.
-        $this->markTestSkipped('Order não está mapeada como entidade Doctrine.');
+        // Pedido não possui #[ORM\Entity] nem #[ORM\Table] — não é uma entidade Doctrine mapeada.
+        $this->markTestSkipped('Pedido não está mapeada como entidade Doctrine.');
     }
 
     public function testListar()
     {
-        $this->markTestSkipped('Order não está mapeada como entidade Doctrine.');
+        $this->markTestSkipped('Pedido não está mapeada como entidade Doctrine.');
     }
 
     public function testDeletar()
     {
-        $this->markTestSkipped('Order não está mapeada como entidade Doctrine.');
+        $this->markTestSkipped('Pedido não está mapeada como entidade Doctrine.');
     }
 
     public function testBuscarPorStatus()
     {
-        $this->markTestSkipped('Order não está mapeada como entidade Doctrine.');
+        $this->markTestSkipped('Pedido não está mapeada como entidade Doctrine.');
     }
 }

@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: "tb_item_carrinho")]
 class ItemPedido extends GenericModel {
-    #[ORM\ManyToOne(targetEntity: Produto::class)]
-    #[ORM\JoinColumn(name: "produto_id", nullable: false)]
-    private $produto;
 
-    #[ORM\ManyToOne(targetEntity: Carrinho::class, inversedBy: "itens")]
-    #[ORM\JoinColumn(name: "carrinho_id", nullable: false)]
-    private  $carrinho;
+    #[ORM\ManyToOne(targetEntity: Pedido::class)]
+    #[ORM\JoinColumn(name: "pedido_id")]
+    private $pedido;
+    #[ORM\ManyToOne(targetEntity: Produto::class)]
+    #[ORM\JoinColumn(name: "produto_id")]
+    private $produto;
 
     #[ORM\Column(type: "integer")]
     private $quantidade;
@@ -20,52 +20,78 @@ class ItemPedido extends GenericModel {
     #[ORM\Column(type: "decimal", precision:10, scale: 2)]
     private $preco;
 
-    public function __construct($produto, $carrinho, $quantidade) {
-        $this->produtos = $produto;
-        $this->carrinho = $carrinho;
+    public function __construct($pedido, $produto, $quantidade, $preco)
+    {
+        $this->pedido = $pedido;
+        $this->produto = $produto;
         $this->quantidade = $quantidade;
-        $this->preco = $produto->getPrecoUnitario();
+        $this->preco = $preco;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPedido()
+    {
+        return $this->pedido;
+    }
+
+    /**
+     * @param mixed $pedido
+     */
+    public function setPedido($pedido): void
+    {
+        $this->pedido = $pedido;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getProduto()
     {
-        return $this->produtos;
+        return $this->produto;
     }
 
-    public function setProduto(Produto $produto)
+    /**
+     * @param mixed $produto
+     */
+    public function setProduto($produto): void
     {
-        $this->produtos = $produto;
+        $this->produto = $produto;
     }
 
-    public function getCarrinho()
-    {
-        return $this->carrinho;
-    }
-
-    public function setCarrinho(Carrinho $carrinho)
-    {
-        $this->carrinho = $carrinho;
-    }
-
-
+    /**
+     * @return mixed
+     */
     public function getQuantidade()
     {
         return $this->quantidade;
     }
 
-    public function setQuantidade($quantidade)
+    /**
+     * @param mixed $quantidade
+     */
+    public function setQuantidade($quantidade): void
     {
         $this->quantidade = $quantidade;
     }
 
-    public function getPrecoNoMomento()
+    /**
+     * @return mixed
+     */
+    public function getPreco()
     {
-        return $this->precoNoMomento;
+        return $this->preco;
     }
 
-    public function setPreco($preco)
+    /**
+     * @param mixed $preco
+     */
+    public function setPreco($preco): void
     {
         $this->preco = $preco;
     }
+
+
 
 }

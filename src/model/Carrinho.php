@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Table(name:'tb_carrinho')]
 class Carrinho extends GenericModel
 {
-    #[ORM\OneToMany(mappedBy: "carrinho_id", targetEntity: ItemPedido::class, cascade: ["all"], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: "carrinho", targetEntity: ItemPedido::class, cascade: ["all"], orphanRemoval: true)]
     private $itens;
 
     #[ORM\Column(type: "string")]
@@ -17,25 +17,11 @@ class Carrinho extends GenericModel
     #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
     private $valorTotal = 0;
 
-    #[ORM\OneToOne(targetEntity: Cliente::class)]
-    #[ORM\JoinColumn(name: "cliente_id", referencedColumnName: "id")]
-    private $cliente;
-
-    public function __construct($cliente, $status = 'ABERTO') {
-        $this->cliente = $cliente;
+    public function __construct($status = 'ABERTO') {
         $this->status = $status;
         $this->itens = new ArrayCollection();
     }
 
-    public function getCliente()
-    {
-        return $this->cliente;
-    }
-
-    public function setCliente($cliente)
-    {
-        $this->cliente = $cliente;
-    }
 
     public function getValorTotal()
     {

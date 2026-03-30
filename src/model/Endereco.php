@@ -28,8 +28,6 @@ class Endereco extends GenericModel
     private $pais;
     #[ORM\Column(type: "string")]
 
-    #[ORM\OneToMany(targetEntity: UserModel::class, mappedBy: "enderecos")]
-    private Collection $usuarios;
 
     public function __construct($rua, $numero, $complemento, $bairro, $cidade, $estado, $cep, $pais ){
         $this->rua = $rua;
@@ -41,7 +39,7 @@ class Endereco extends GenericModel
         $this->cep = $cep;
         $this->pais = $pais;
 
-        $this->usuarios = new ArrayCollection();
+
     }
 
     public function setRua($rua){

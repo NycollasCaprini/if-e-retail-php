@@ -20,6 +20,7 @@ class Produto extends GenericModel
     #[ORM\Column(type: "string")]
     private $status;
 
+
     public function __construct($descricao, $quantidade, $precoUnitario, $status)
     {
         $this->descricao = $descricao;
