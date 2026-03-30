@@ -19,21 +19,21 @@ class CarrinhoDAOTest extends TestCase
 
     public function testSalvar()
     {
-        $carrinho = new Carrinho(null, "ABERTO");
+        $carrinho = new Carrinho("ABERTO");
         $salvo = CarrinhoDAO::salvar($carrinho);
         $this->assertNotNull($salvo->getID());
     }
 
     public function testListar()
     {
-        CarrinhoDAO::salvar(new Carrinho(null, "ABERTO"));
+        CarrinhoDAO::salvar(new Carrinho("ABERTO"));
         $lista = CarrinhoDAO::listar();
         $this->assertNotEmpty($lista);
     }
 
     public function testDeletar()
     {
-        $carrinho = CarrinhoDAO::salvar(new Carrinho(null, "ABERTO"));
+        $carrinho = CarrinhoDAO::salvar(new Carrinho("ABERTO"));
         CarrinhoDAO::deletar($carrinho);
         $lista = CarrinhoDAO::listar();
         foreach ($lista as $c) {
@@ -43,7 +43,7 @@ class CarrinhoDAOTest extends TestCase
 
     public function testBuscarAbertos()
     {
-        CarrinhoDAO::salvar(new Carrinho(null, "ABERTO"));
+        CarrinhoDAO::salvar(new Carrinho("ABERTO"));
         $resultado = CarrinhoDAO::buscarAbertos();
         $this->assertNotEmpty($resultado);
     }

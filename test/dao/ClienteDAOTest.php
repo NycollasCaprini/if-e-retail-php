@@ -19,18 +19,9 @@ class ClienteDAOTest extends TestCase
 
     private function criarCliente(): Cliente
     {
-        // UserModel::__construct($name, $cpf, $idade, $senha, $tipo) recebe
-        // $endereco e $contato no lugar de $idade e $senha devido ao mismatch
-        // no parent::__construct de Cliente — corrigimos com setters.
-        $cliente = new Cliente(
-            null, null, null,
-            "Elis Regina", "222.333.444-55",
-            null, null, 32, "hash456", "cliente"
+        return new Cliente(
+            "Elis Regina", "222.333.444-55", new \DateTime("1992-06-17"), "hash456", "cliente"
         );
-        $cliente->setIdade(32);
-        $cliente->setSenha("hash456");
-        $cliente->setTipo("cliente");
-        return $cliente;
     }
 
     public function testSalvar()

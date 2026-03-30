@@ -4,7 +4,7 @@ namespace model;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: "tb_item_carrinho")]
+#[ORM\Table(name: "tb_item_pedido")]
 class ItemPedido extends GenericModel {
 
     #[ORM\ManyToOne(targetEntity: Pedido::class)]

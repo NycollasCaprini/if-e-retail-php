@@ -19,17 +19,10 @@ class AdminDAOTest extends TestCase
 
     private function criarAdmin(): Admin
     {
-        // UserModel::__construct($name, $cpf, $idade, $senha, $tipo) recebe
-        // $endereco e $contato no lugar de $idade e $senha devido ao mismatch
-        // no parent::__construct de Admin — corrigimos com setters.
-        $admin = new Admin(
-            "Tom Jobim", "111.222.333-44", null, null, 45, "hash123",
+        return new Admin(
+            "Tom Jobim", "111.222.333-44", new \DateTime("1975-01-01"), "hash123",
             "M-001", "TI", "Gerente", "2020-01-10", new \DateTime(), "admin"
         );
-        $admin->setIdade(45);
-        $admin->setSenha("hash123");
-        $admin->setTipo("admin");
-        return $admin;
     }
 
     public function testSalvar()
