@@ -39,6 +39,17 @@ abstract class GenericDAO
         }
     }
 
+    public static function buscarPorId($id)
+    {
+        try {
+            $em = Conexao::getEntityManager(); // captura a instancia do EntityManager que controla o nosso banco pelo Doctrine.
+            $repository = $em->getRepository(static::$modelClass); // Obtém o repositório específico da classe/entidade alvo
+            return $repository->find($id); // Executa um 'SELECT * FROM ...' e salva tudo em um array. Retorna este array no final
+        } catch (Exception $ex) {
+            throw new Exception("Falha ao buscar dados." . $ex->getMessage());
+        }
+    }
+
     public static function deletar(GenericModel $model)
     {
         try {
