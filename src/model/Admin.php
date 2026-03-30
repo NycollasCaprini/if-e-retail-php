@@ -22,9 +22,9 @@ class Admin extends UserModel
 
 
 
-    public function __construct($name, $cpf, $endereco, $contato, $idade, $senha, $matricula, $setor, $cargo, $dataAdmissao, $status, $tipo){
+    public function __construct($name, $cpf, $dataNascimento, $senha, $matricula, $setor, $cargo, $dataAdmissao, $status, $tipo){
 
-        parent::__construct($name, $cpf, $endereco, $contato, $idade, $senha, $tipo); #com esse parent acessamos o construtor da classe pai e obrigamos a criar um admin completo, ou seja, com os atributos herdados.
+        parent::__construct($name, $cpf, $dataNascimento, $senha, $tipo); #com esse parent acessamos o construtor da classe pai e obrigamos a criar um admin completo, ou seja, com os atributos herdados.
 
         $this->matricula = $matricula;
         $this->setor = $setor;

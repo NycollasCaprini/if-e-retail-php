@@ -24,3 +24,8 @@ composer.phar
 /app/Config/database.php
 /vendors/*
 .env
+.env.example
+.claude/
+.phpunit.result.cache
+cli-config.php
+doctrine

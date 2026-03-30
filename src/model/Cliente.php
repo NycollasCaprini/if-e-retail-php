@@ -3,6 +3,7 @@
 namespace model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'tb_cliente')]
@@ -21,11 +22,12 @@ class Cliente extends UserModel
     private $listaFavoritos;
 
 
-    public function __construct($carrinho, $listaPedidos, $listaFavoritos)
+    public function __construct($name, $cpf, $dataNascimento, $senha, $tipo, $carrinho = null)
     {
+        parent::__construct($name, $cpf, $dataNascimento, $senha, $tipo);
         $this->carrinho = $carrinho;
-        $this->listaPedidos = $listaPedidos;
-        $this->listaFavoritos = $listaFavoritos;
+        $this->listaPedidos = new ArrayCollection();
+        $this->listaFavoritos = new ArrayCollection();
     }
 
 

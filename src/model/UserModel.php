@@ -16,7 +16,7 @@ abstract class UserModel extends GenericModel{
     private $cpf;
     #[ORM\OneToOne(targetEntity: Endereco::class, cascade: ['all'], orphanRemoval: true, fetch: 'LAZY')]
     #[ORM\JoinColumn(name:"endereco_id")]
-    protected Collection $endereco;
+    protected $endereco = null;
     #[ORM\OneToMany(mappedBy: "user", targetEntity: Contato::class, cascade: ["all"], orphanRemoval: true, fetch: 'LAZY')]
     protected $contatos;
     #[ORM\Column(type:'date')]
@@ -35,7 +35,7 @@ abstract class UserModel extends GenericModel{
         $this->senha = $senha;
         $this->tipo = $tipo;
 
-        $this->enderecos = new ArrayCollection();
+        $this->endereco = null;
         $this->contatos = new ArrayCollection();
     }
     public function setName($name){
@@ -71,7 +71,7 @@ abstract class UserModel extends GenericModel{
     }
 
     public function setDataNascimento($dataNascimento){
-        $this->idade=$dataNascimento;
+        $this->dataNascimento=$dataNascimento;
     }
 
     public function getDataNascimento(){
