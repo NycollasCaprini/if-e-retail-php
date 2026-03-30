@@ -5,17 +5,11 @@ namespace test\dao;
 use dao\ClienteDAO;
 use model\Cliente;
 use PHPUnit\Framework\TestCase;
-use utils\Conexao;
+
 
 class ClienteDAOTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        $reflection = new \ReflectionClass(Conexao::class);
-        $prop = $reflection->getProperty('entityManager');
-        $prop->setAccessible(true);
-        $prop->setValue(null, null);
-    }
+
 
     private function criarCliente(): Cliente
     {

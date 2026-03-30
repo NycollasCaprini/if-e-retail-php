@@ -15,7 +15,7 @@ class Pedido extends GenericModel
     #[ORM\Column(type:'boolean')]
     private $status;
 
-    #[ORM\ManyToOne(targetEntity: Cliente::class)]
+    #[ORM\ManyToOne(targetEntity: Cliente::class, fetch:'EAGER')]
     #[ORM\JoinColumn(name: "cliente_id")]
     private $cliente;
 
@@ -61,4 +61,27 @@ class Pedido extends GenericModel
     {
         return $this->status;
     }
+
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    public function setCliente($cliente): void
+    {
+        $this->cliente = $cliente;
+    }
+
+    public function getItens()
+    {
+        return $this->itens;
+    }
+
+    public function setItens($itens): void
+    {
+        $this->itens = $itens;
+    }
+
+
+
 }
