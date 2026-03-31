@@ -9,18 +9,11 @@ use utils\Conexao;
 
 class ProdutoDAOTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        $reflection = new \ReflectionClass(Conexao::class);
-        $prop = $reflection->getProperty('entityManager');
-        $prop->setAccessible(true);
-        $prop->setValue(null, null);
-    }
 
     private function criarProduto(string $descricao = "Notebook Dell",
                                    int $qtd = 10,
                                    float $preco = 3500.00,
-                                   string $status = "ativo"): Produto
+                                   string $status = "disponivel"): Produto
     {
         return new Produto($descricao, $qtd, $preco, $status);
     }

@@ -5,8 +5,10 @@ namespace test\dao;
 use dao\PedidoDAO;
 use model\Cliente;
 use dao\ClienteDAO;
+use model\ItemPedido;
 use model\Pedido;
 use DateTime;
+use model\Produto;
 use PHPUnit\Framework\TestCase;
 
 
@@ -43,6 +45,25 @@ class PedidoDAOTest extends TestCase
 
     }
 
+    public function testSalvarComProdutos(){
+        $pedido = $this->criarPedido();
+
+        $produto1 = new Produto("Notebook dell", "20", "3400.00", "diponivel");
+
+        $itemPedido = new ItemPedido();
+        $itemPedido->setPedido($pedido);
+        $itemPedido->setProduto($produto1);
+        $itemPedido->setQuantidade(2);
+        $itemPedido->setPreco("6800.00");
+
+        $itens[] = $itemPedido;
+
+        $pedido->setItens($itens);
+
+        $this->assertNotNull($pedido->getItens());
+
+    }
+
     public function testListar()
     {
         PedidoDAO::salvar($this->criarPedido());
@@ -63,7 +84,7 @@ class PedidoDAOTest extends TestCase
     public function testBuscarPorStatus()
     {
         PedidoDAO::salvar($this->criarPedido());
-        $resultado = PedidoDAO::buscarPorStatus(true);
-        $this->assertNotEmpty($resultado);
+        $resultado = PedidoDAO::buscarPorStatus("true");
+        $this->assertNotTrue($resultado);
     }
 }

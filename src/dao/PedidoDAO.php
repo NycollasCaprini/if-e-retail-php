@@ -10,14 +10,14 @@ class PedidoDAO extends GenericDAO
 {
     protected static $modelClass = Pedido::class;
 
-    public static function buscarPorStatus($status)
-    {
-        try {
+    public static function buscarPorStatus($status){
+        try{
             $em = Conexao::getEntityManager();
-            $repository = $em->getRepository(Pedido::class);
-            return $repository->findBy(['status' => $status]);
-        } catch (Exception $ex) {
-            throw new Exception("Falha ao buscar pedidos por status. " . $ex->getMessage());
+            $query = $em->createQuery("SELECT p FROM model\Produto p WHERE p.status = :status");
+            $query->setParameter("status", $status);
+            return $query->getResult();
+        }catch(Exception $e){
+            throw new Exception("Falha ao buscar produto por status. " .  $e->getMessage());
         }
     }
 }

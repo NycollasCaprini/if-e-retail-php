@@ -42,4 +42,17 @@ class Contato extends GenericModel
     {
         return $this->email;
     }
+
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario($usuario): void
+    {
+        $this->usuario = $usuario;
+    }
+
+
+
 }

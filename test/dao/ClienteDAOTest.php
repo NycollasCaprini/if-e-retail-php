@@ -4,6 +4,8 @@ namespace test\dao;
 
 use dao\ClienteDAO;
 use model\Cliente;
+use model\Contato;
+use model\Endereco;
 use PHPUnit\Framework\TestCase;
 
 
@@ -18,11 +20,50 @@ class ClienteDAOTest extends TestCase
         );
     }
 
+    private function criarEndereco(): Endereco{
+        return new Endereco(
+            "Palestra Italia", "1996", "ap01", "Centro",
+            "Sao Paulo", "Sao Paulo", "86543-000", "Brasil"
+        );
+    }
+
     public function testSalvar()
     {
         $cliente = $this->criarCliente();
         $salvo = ClienteDAO::salvar($cliente);
         $this->assertNotNull($salvo->getID());
+    }
+
+    public function testSalvarComContatos(){
+        $cliente = $this->criarCliente();
+
+        $contato1 = new Contato("999222-222", "luiz@gmail.com");
+        $contato1->setUsuario($cliente);
+
+        $contato2 = new Contato("666444-111", "francisco@gmail.com");
+        $contato2->setUsuario($cliente);
+
+        $contatos[] = $contato1;
+        $contatos[] = $contato2;
+
+        $cliente->setContato($contatos);
+
+        $clienteInserido = ClienteDAO::salvar($cliente);
+
+        $this->assertNotNull($clienteInserido);
+    }
+
+    public function testSalvarComEndreco(){
+        $cliente = $this->criarCliente();
+        $endereco = $this->criarEndereco();
+
+        $cliente->setEndereco($endereco);
+
+        $clienteInserido = ClienteDAO::salvar($cliente);
+
+        $enderecoDoCliente = $cliente->getEndereco();
+        echo $enderecoDoCliente->getRua();
+        $this->assertNotNull($clienteInserido);
     }
 
     public function testListar()
