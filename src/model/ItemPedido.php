@@ -20,17 +20,6 @@ class ItemPedido extends GenericModel {
     #[ORM\Column(type: "decimal", precision:10, scale: 2)]
     private $preco;
 
-    public function __construct($pedido, $produto, $quantidade, $preco)
-    {
-        $this->pedido = $pedido;
-        $this->produto = $produto;
-        $this->quantidade = $quantidade;
-        $this->preco = $preco;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPedido()
     {
         return $this->pedido;
