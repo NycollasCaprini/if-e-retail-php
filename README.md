@@ -2,20 +2,21 @@
 
 Sistema de gestão de varejo desenvolvido para o curso de Sistemas de Informação - IFPR Palmas.
 
-### Dependências
-O projteto utiliza Composer para gerenciar bibliotecas. Você precisa instalar as dependências listadas no composer.json
+## 🛠️ Tecnologias e Dependências
 
-Se você tiver o Composer instalado globalmente:
-**<br>Composer install**
+* **Linguagem:** PHP 8.x
+* **Gerenciador de Dependências:** Composer
+* **Banco de Dados:** MySQL
 
-Se estiver usando o composer.phar localmente:
-**<br>php composer.phar install**
+Para instalar as dependências:
+
+composer install
 
 ---
-### Arquitetura
+## Arquitetura
 O projeto segue o padrão MVC.
 
-Estrutura de Pastas:
+### Estrutura de Pastas:
 
 * 📂 src/
   * controller/
@@ -24,3 +25,6 @@ Estrutura de Pastas:
   * utils/
   * view/
 * 📂 test/
+---
+O sistema implementa CRUD completo para Admin, Cliente, Pedido e Produto.
+A classe UserModel é a base para Admin e Cliente.
