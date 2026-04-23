@@ -14,7 +14,8 @@ class Admin extends UserModel
     private $setor;
     #[ORM\Column(type:'string')]
     private $cargo;
-    #[ORM\Column(type:'string')]
+    // Correção: tipo alterado de 'string' para 'datetime' para refletir a natureza do dado
+    #[ORM\Column(type:'datetime')]
     private $dataAdmissao;
     #[ORM\Column(type:'date')]
     private $status;

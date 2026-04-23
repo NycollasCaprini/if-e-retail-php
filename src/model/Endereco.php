@@ -26,8 +26,7 @@ class Endereco extends GenericModel
     private $cep;
     #[ORM\Column(type: "string")]
     private $pais;
-    #[ORM\Column(type: "string")]
-
+    // Correção: #[ORM\Column] solto sem atributo correspondente foi removido
 
     public function __construct($rua, $numero, $complemento, $bairro, $cidade, $estado, $cep, $pais ){
         $this->rua = $rua;

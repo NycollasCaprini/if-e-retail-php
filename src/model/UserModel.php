@@ -17,7 +17,8 @@ abstract class UserModel extends GenericModel{
     #[ORM\OneToOne(targetEntity: Endereco::class, cascade: ['all'], orphanRemoval: true, fetch: 'LAZY')]
     #[ORM\JoinColumn(name:"endereco_id")]
     protected $endereco = null;
-    #[ORM\OneToMany(mappedBy: "user", targetEntity: Contato::class, cascade: ["all"], orphanRemoval: true, fetch: 'LAZY')]
+    // Correção: mappedBy deve referenciar o atributo '$usuario' existente em Contato, não '$user'
+    #[ORM\OneToMany(mappedBy: "usuario", targetEntity: Contato::class, cascade: ["all"], orphanRemoval: true, fetch: 'LAZY')]
     protected $contatos;
     #[ORM\Column(type:'date')]
     private $dataNascimento;

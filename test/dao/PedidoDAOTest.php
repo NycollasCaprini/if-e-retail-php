@@ -87,4 +87,16 @@ class PedidoDAOTest extends TestCase
         $resultado = PedidoDAO::buscarPorStatus("true");
         $this->assertNotTrue($resultado);
     }
+
+    // Teste de atualização: verifica que alterações em um pedido persistido são salvas corretamente
+    public function testAtualizar()
+    {
+        $pedido = PedidoDAO::salvar($this->criarPedido());
+        $novaDataEntrega = new DateTime("+14 days");
+        $pedido->setDataEntrega($novaDataEntrega);
+        $pedido->setStatus(false);
+        $atualizado = PedidoDAO::salvar($pedido);
+        $this->assertEquals(false, $atualizado->getStatus());
+        $this->assertEquals($novaDataEntrega, $atualizado->getDataEntrega());
+    }
 }

@@ -103,4 +103,15 @@ class ClienteDAOTest extends TestCase
         $resultado = ClienteDAO::buscarPorNomeDQL("Elis");
         $this->assertNotEmpty($resultado);
     }
+
+    // Teste de atualização: verifica que alterações em um cliente persistido são salvas corretamente
+    public function testAtualizar()
+    {
+        $cliente = ClienteDAO::salvar($this->criarCliente());
+        $cliente->setName("Clara Nunes");
+        $cliente->setCpf("999.888.777-66");
+        $atualizado = ClienteDAO::salvar($cliente);
+        $this->assertEquals("Clara Nunes", $atualizado->getName());
+        $this->assertEquals("999.888.777-66", $atualizado->getCpf());
+    }
 }

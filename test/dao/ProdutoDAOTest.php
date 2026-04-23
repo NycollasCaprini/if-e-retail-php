@@ -13,7 +13,8 @@ class ProdutoDAOTest extends TestCase
     private function criarProduto(string $descricao = "Notebook Dell",
                                    int $qtd = 10,
                                    float $preco = 3500.00,
-                                   string $status = "disponivel"): Produto
+                                   // Correção: status padronizado para "ativo", alinhado com o filtro usado em buscarPorStatus()
+                                   string $status = "ativo"): Produto
     {
         return new Produto($descricao, $qtd, $preco, $status);
     }
@@ -61,5 +62,16 @@ class ProdutoDAOTest extends TestCase
         ProdutoDAO::salvar($this->criarProduto());
         $resultado = ProdutoDAO::buscarPorStatus("ativo");
         $this->assertNotEmpty($resultado);
+    }
+
+    // Teste de atualização: verifica que alterações em um produto persistido são salvas corretamente
+    public function testAtualizar()
+    {
+        $produto = ProdutoDAO::salvar($this->criarProduto("Teclado Mecânico", 5, 250.00));
+        $produto->setDescricao("Teclado Mecânico RGB");
+        $produto->setPrecoUnitario(299.90);
+        $atualizado = ProdutoDAO::salvar($produto);
+        $this->assertEquals("Teclado Mecânico RGB", $atualizado->getDescricao());
+        $this->assertEquals(299.90, $atualizado->getPrecoUnitario());
     }
 }

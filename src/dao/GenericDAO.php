@@ -15,6 +15,7 @@ abstract class GenericDAO
     // Método estático — não precisa de instanciação
     public static function salvar(GenericModel $model)
     {
+        $em = null;
         try {
             $em = Conexao::getEntityManager(); // captura a instancia do EntityManager que controla o nosso banco pelo Doctrine.
             $em->beginTransaction(); // Inicia explicitamente uma transação.
@@ -23,7 +24,9 @@ abstract class GenericDAO
             $em->commit(); // Torna a transação permanente no banco
             return $model; // retorna o model com o ID já preenchido. O doctrine salva diretamente no model enviado
         } catch (Exception $ex) {
-            $em->rollback(); // Se acontecer algum erro, a transação é desfeita
+            if ($em !== null) {
+                $em->rollback(); // Se acontecer algum erro, a transação é desfeita
+            }
             throw new Exception("Falha ao salvar os dados." . $ex->getMessage());
         }
     }
@@ -52,6 +55,7 @@ abstract class GenericDAO
 
     public static function deletar(GenericModel $model)
     {
+        $em = null;
         try {
             $em = Conexao::getEntityManager();
             $em->beginTransaction();
@@ -59,7 +63,9 @@ abstract class GenericDAO
             $em->flush();
             $em->commit();
         } catch (Exception $ex) {
-            $em->rollback();
+            if ($em !== null) {
+                $em->rollback();
+            }
             throw new Exception("Falha ao deletar os dados." . $ex->getMessage());
         }
     }
