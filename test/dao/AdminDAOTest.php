@@ -13,7 +13,7 @@ class AdminDAOTest extends TestCase
     {
         return new Admin(
             "Tom Jobim", "111.222.333-44", new \DateTime("1975-01-01"), "hash123",
-            "M-001", "TI", "Gerente", "2020-01-10", new \DateTime(), "admin"
+            "M-001", "TI", "Gerente", new \DateTime("2020-01-10"), new \DateTime(), "admin"
         );
     }
 
@@ -62,5 +62,16 @@ class AdminDAOTest extends TestCase
         AdminDAO::salvar($this->criarAdmin());
         $resultado = AdminDAO::buscarPorCargo("Gerente");
         $this->assertNotEmpty($resultado);
+    }
+
+    // Teste de atualização: verifica que alterações em um admin persistido são salvas corretamente
+    public function testAtualizar()
+    {
+        $admin = AdminDAO::salvar($this->criarAdmin());
+        $admin->setName("Chico Buarque");
+        $admin->setCargo("Diretor");
+        $atualizado = AdminDAO::salvar($admin);
+        $this->assertEquals("Chico Buarque", $atualizado->getName());
+        $this->assertEquals("Diretor", $atualizado->getCargo());
     }
 }

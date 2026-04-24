@@ -7,6 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "tb_item_pedido")]
 class ItemPedido extends GenericModel {
 
+    // Correção: atributo adicionado para satisfazer mappedBy="carrinho" declarado em Carrinho::$itens
+    #[ORM\ManyToOne(targetEntity: Carrinho::class)]
+    #[ORM\JoinColumn(name: "carrinho_id")]
+    private $carrinho;
+
     #[ORM\ManyToOne(targetEntity: Pedido::class)]
     #[ORM\JoinColumn(name: "pedido_id")]
     private $pedido;
@@ -19,6 +24,16 @@ class ItemPedido extends GenericModel {
 
     #[ORM\Column(type: "decimal", precision:10, scale: 2)]
     private $preco;
+
+    public function getCarrinho()
+    {
+        return $this->carrinho;
+    }
+
+    public function setCarrinho($carrinho): void
+    {
+        $this->carrinho = $carrinho;
+    }
 
     public function getPedido()
     {
