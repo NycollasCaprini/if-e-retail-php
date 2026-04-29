@@ -12,7 +12,8 @@
           "dao\\": "src/dao/",
           "model\\": "src/model/",
           "test\\": "test/",
-          "utils\\": "src/utils/"
+          "utils\\": "src/utils/",
+          "controller\\": "src/controller"
         }
     },
     "authors": [
@@ -29,6 +30,7 @@
         "doctrine/orm": "^3.6",
         "symfony/console": "^7.0",
         "symfony/cache": "^7.0",
-        "symfony/var-exporter": "^7.0"
+        "symfony/var-exporter": "^7.0",
+        "nikic/fast-route": "^1.3"
     }
 }
