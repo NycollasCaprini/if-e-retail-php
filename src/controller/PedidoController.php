@@ -24,7 +24,7 @@ class PedidoController{
                 echo "pedido nao encontrado";
             }
         }catch(Exception $ex){
-            echo "erro ao buscar essa bosta de pedido" . $ex->getMessage();
+            echo "erro ao buscar pedido" . $ex->getMessage();
         } finally {
             require __DIR__ . "/../view/lista-pedidos.php";
         }
